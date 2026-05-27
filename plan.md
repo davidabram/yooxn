@@ -30,3 +30,6 @@ This document tracks planned improvements and features for the `yooxn` project.
 ## 4. DevOps & Ecosystem
 - [x] **CI Integration**: Add a GitHub Action to run `make test` on every push and pull request.
 - [x] **PyPI Readiness**: Prepare the package for potential distribution (ensure `description` and `keywords` in `pyproject.toml` are complete).
+- [x] **Nix Flake**: Add a `flake.nix` that can build and run the `yooxnas` assembler.
+    - Provide `nix build` (package output) and `nix run` (CLI entrypoint) support.
+    - Include a `devShell` with the project’s Python toolchain so `make test` / `pytest` can be run inside `nix develop`.
