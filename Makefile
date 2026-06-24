@@ -35,7 +35,7 @@ YOOXN_ROMS     := $(patsubst $(MYTAL_SRC_DIR)/%.tal,$(MYTAL_BUILD_DIR)/%.yo.rom,
 # --- Primary Targets ---
 
 .DEFAULT_GOAL := all
-.PHONY: all clean test check tools myroms yo-myroms lint format typecheck
+.PHONY: all clean test check tools myroms yo-myroms lint format typecheck coverage
 
 # Build everything: tools and both sets of ROMs
 all: tools myroms yo-myroms
@@ -53,6 +53,11 @@ yo-myroms: $(YOOXN_ROMS)
 test:
 	@echo ">> Running tests"
 	@$(PYTEST)
+
+# Run tests with coverage, emitting coverage.lcov
+coverage:
+	@echo ">> Running tests with coverage"
+	@$(PYTEST) --cov --cov-report=lcov:coverage.lcov --cov-report=term
 
 # Lint and test
 check: lint typecheck test

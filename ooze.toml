@@ -1,0 +1,40 @@
+# ooze config — defaults applied when CLI flags are absent.
+# CLI flags always override these values.
+
+[scope]
+# Extra exclude globs on top of DEFAULT_EXCLUDES (.git, target, .ooze, node_modules, vendor, __pycache__, .gradle) and .gitignore.
+exclude = []
+# Only mutate files changed versus this git ref (diff BASE...HEAD + uncommitted/untracked).
+# changed_only = "main"
+
+[mutation]
+strategy = "actionable"
+# operators = ["swap_comparison", "negate_equality", "swap_logical", "swap_boolean"]
+# exclude_operators = []
+static_skips = true
+context_lines = 3
+# limit = 50
+# lcov = "lcov.info"
+
+[runner]
+workspace_backend = "auto"
+jobs = 4
+timeout_seconds = 60
+preflight = true
+per_worker_cache = false
+warmup = false
+cache_dir = ".ooze/cache"
+runs_dir = ".ooze/runs"
+
+[probe]
+command = ["pytest", "-q"]
+env = [
+    "PYTHONDONTWRITEBYTECODE=1",
+    "PYTEST_CACHE_DIR=.ooze/cache/pytest-{worker}",
+]
+
+[report]
+format = "human"
+# output = "ooze-report.json"
+fail_on_survivors = true
+allow_incomplete = false

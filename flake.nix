@@ -4,12 +4,14 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    ooze.url = "github:davidabram/ooze";
   };
 
   outputs =
     { self
     , nixpkgs
     , flake-utils
+    , ooze
     }:
     flake-utils.lib.eachDefaultSystem (system:
       let
@@ -53,6 +55,7 @@
             pyPkgs.pytest
             pyPkgs.ruff
             pyPkgs.mypy
+            ooze.packages.${system}.default
           ];
         };
       });
